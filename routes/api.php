@@ -32,4 +32,3 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::put('todos/{id}', [TodoController::class, 'update']);
     Route::delete('todos/{id}', [TodoController::class, 'destroy']);
 });
-
