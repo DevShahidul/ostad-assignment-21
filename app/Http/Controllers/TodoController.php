@@ -40,14 +40,8 @@ class TodoController extends Controller
     }
 
     // Update a Todo
-    public function update(Request $request, $id)
+    public function update(TodoRequest $request, $id)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'completed' => 'required|boolean',
-        ]);
-
         $userId = Auth::id();
         $todo = Todo::where('user_id', $userId)->findOrFail($id);
         $todo->update([
