@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\TodoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('user-registration', [UserController::class, 'RegisterUser']);
 Route::post('user-login', [UserController::class, 'LoginUser']);
+
+// routes/api.php
+
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('todos', [TodoController::class, 'index']);
+    Route::post('todos', [TodoController::class, 'store']);
+    Route::put('todos/{id}', [TodoController::class, 'update']);
+    Route::delete('todos/{id}', [TodoController::class, 'destroy']);
+});
+
